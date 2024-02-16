@@ -1,6 +1,4 @@
 import requests
-import time
-
 
 def request(URL):
     req = requests.get(url=URL)
@@ -11,13 +9,6 @@ def request(URL):
     description = req_result['weather'][0]['description']
     temp = req_result['main']['temp']
     print(f"Condition: {condition} \nTemp: {temp}'c \nDescription: {description}\n")
-
-"""
-https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
-https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-https://api.openweathermap.org/data/2.5/weather?q={city name},{state code}&appid={API key}
-https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
-"""
 
 def weather_city(city, appid):
     URL = f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={appid}'

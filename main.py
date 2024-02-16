@@ -3,7 +3,6 @@ import requests
 def request(URL):
     req = requests.get(url=URL)
     req_result = req.json()
-    # print(req_result)
     
     condition = req_result['weather'][0]['main']
     description = req_result['weather'][0]['description']

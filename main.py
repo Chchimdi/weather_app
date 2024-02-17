@@ -21,7 +21,8 @@ def weather_lat_long(lat, lon, appid):
     URL = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={appid}"
     request(URL)
     
-appid = '44c8b9cfd1b46c5f31e80bb0a67d8c7d'
+with open('appid.txt', 'r') as file:
+    appid = file.readline().strip()
 print("Welcome to Chimdi's Weather App")
 print("Select any of the options to Check Weather in your desired location: \n 1. city \n 2. zip code \n 3. Longitude and Latitude \n 4. Close app")
 

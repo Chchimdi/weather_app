@@ -13,7 +13,7 @@ def weather_city(city, appid):
     URL = f'https://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={appid}'
     request(URL)
 
-def weather_zip(zipcode, appid):
+def weather_zipcode(zipcode, appid):
     URL = f'https://api.openweathermap.org/data/2.5/weather?zip={zipcode}&units=metric&appid={appid}'
     request(URL)
 
@@ -23,13 +23,25 @@ def weather_lat_long(lat, lon, appid):
 
 def validate_city():
     while True:
-        city = input("Enter city: ").strip()  # .strip() removes leading/trailing whitespace
+        city = input("Enter City: ").strip()  # .strip() removes leading/trailing whitespace
         if city:  # Check if city input is not empty
             try:
                 weather_city(city, appid)
                 break  # Break the loop if the city is valid and no KeyError is raised
             except KeyError:
                 print("City not found. Please enter a valid city name.")
+        else:
+            print("Please enter a correct city name.")
+
+def validate_zipcode():
+    while True:
+        zipcode = input("Enter Zipcode: ").strip()  # .strip() removes leading/trailing whitespace
+        if zipcode:  # Check if city input is not empty
+            try:
+                weather_zipcode(zipcode, appid)
+                break  # Break the loop if the city is valid and no KeyError is raised
+            except KeyError:
+                print("Zipcode not found. Please enter a valid zipcode.")
         else:
             print("Please enter a correct city name.")
 
@@ -60,13 +72,9 @@ def run_app():
             continue
 
         elif user_input == 2:
-            zipcode_input = input("Enter zipcode: ")
-            try:
-                zipcode = int(zipcode_input)  # Convert to integer
-                weather_zip(zipcode, appid)
-            except ValueError:
-                print("Please enter a valid integer for the zipcode.")
-                continue
+            validate_zipcode()
+            continue
+
         elif user_input == 3:
             lat_input = input("Enter latitude: ")
             lon_input = input("Enter longitude: ")

@@ -23,32 +23,54 @@ def weather_lat_long(lat, lon, appid):
     
 with open('appid.txt', 'r') as file:
     appid = file.readline().strip()
+
 print("Welcome to Chimdi's Weather App")
-print("Select any of the options to Check Weather in your desired location: \n 1. city \n 2. zip code \n 3. Longitude and Latitude \n 4. Close app")
 
-def main():
+
+def run_app():
     while True:
-        user_input = int(input("Enter your an option between 1-4: "))
+        print("Check the weather of a location.")
+        print("\nSelect an option:")
+        print("1. Enter city")
+        print("2. Enter zipcode")
+        print("3. Enter latitude and longitude")
+        print("4. Quit")
+
+        user_input = input("Enter your option (1-4): ")
+        if not user_input.isdigit() or not 1 <= int(user_input) <= 4:
+            print("Enter a valid input.")
+            continue
+
+        user_input = int(user_input)
+
         if user_input == 1:
-            city = input("Enter city: ")
-            weather_city(city, appid)
+            city = input("Enter city: ").strip()  # .strip() removes leading/trailing whitespace
+            if city:  # Check if city input is not empty
+                weather_city(city, appid)
+            else:
+                print("Please enter a valid city name.")
+                continue
         elif user_input == 2:
-            zipcode = input("Enter zipcode: ")
-            weather_zip(zipcode, appid)
+            zipcode_input = input("Enter zipcode: ")
+            try:
+                zipcode = int(zipcode_input)  # Convert to integer
+                weather_zip(zipcode, appid)
+            except ValueError:
+                print("Please enter a valid integer for the zipcode.")
+                continue
         elif user_input == 3:
-            lat = input("Enter latitude: ")
-            lon = input("Enter longitude: ")
-            weather_lat_long(lat, lon, appid)
+            lat_input = input("Enter latitude: ")
+            lon_input = input("Enter longitude: ")
+            try:
+                lat = int(lat_input)  # Convert to integer
+                lon = int(lon_input)  # Convert to integer
+                weather_lat_long(lat, lon, appid)
+            except ValueError:
+                print("Please enter valid integers for latitude and longitude.")
+                continue
         elif user_input == 4:
+            print("Exiting the app. Thank you!")
             break
-        else:
-            print("Enter a valid input")
 
-main()
-print("\nDo you want to check the weather again? \n Y for Yes \n Any other character for No")
-response = input("Enter option: ")
-if response == "Y" or response == "y":
-    main()
-
-
+run_app()
 print("\nThank you for using the Weather App.")

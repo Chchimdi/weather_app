@@ -52,8 +52,3 @@ if response == "Y" or response == "y":
 
 
 print("\nThank you for using the Weather App.")
-
-
-"""
-These are extra codes that I will delete later.
-"""

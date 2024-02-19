@@ -20,7 +20,19 @@ def weather_zip(zipcode, appid):
 def weather_lat_long(lat, lon, appid):
     URL = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={appid}"
     request(URL)
-    
+
+def validate_city():
+    while True:
+        city = input("Enter city: ").strip()  # .strip() removes leading/trailing whitespace
+        if city:  # Check if city input is not empty
+            try:
+                weather_city(city, appid)
+                break  # Break the loop if the city is valid and no KeyError is raised
+            except KeyError:
+                print("City not found. Please enter a valid city name.")
+        else:
+            print("Please enter a correct city name.")
+
 with open('appid.txt', 'r') as file:
     appid = file.readline().strip()
 
@@ -30,7 +42,7 @@ print("Welcome to Chimdi's Weather App")
 def run_app():
     while True:
         print("Check the weather of a location.")
-        print("\nSelect an option:")
+        print("Select an option:")
         print("1. Enter city")
         print("2. Enter zipcode")
         print("3. Enter latitude and longitude")
@@ -44,12 +56,9 @@ def run_app():
         user_input = int(user_input)
 
         if user_input == 1:
-            city = input("Enter city: ").strip()  # .strip() removes leading/trailing whitespace
-            if city:  # Check if city input is not empty
-                weather_city(city, appid)
-            else:
-                print("Please enter a valid city name.")
-                continue
+            validate_city()
+            continue
+
         elif user_input == 2:
             zipcode_input = input("Enter zipcode: ")
             try:

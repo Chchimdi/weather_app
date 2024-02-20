@@ -45,6 +45,17 @@ def validate_zipcode():
         else:
             print("Please enter a correct city name.")
 
+def validate_lat_long():
+    while True:
+        lat = input("Enter latitude: ")
+        lon = input("Enter longitude: ")
+        if lat and lon:
+            try:
+                weather_lat_long(lat, lon, appid)
+                break
+            except KeyError:
+                print("Please enter valid latitude and longitude of a place.")
+
 with open('appid.txt', 'r') as file:
     appid = file.readline().strip()
 
@@ -76,15 +87,9 @@ def run_app():
             continue
 
         elif user_input == 3:
-            lat_input = input("Enter latitude: ")
-            lon_input = input("Enter longitude: ")
-            try:
-                lat = int(lat_input)  # Convert to integer
-                lon = int(lon_input)  # Convert to integer
-                weather_lat_long(lat, lon, appid)
-            except ValueError:
-                print("Please enter valid integers for latitude and longitude.")
-                continue
+            validate_lat_long()
+            continue
+
         elif user_input == 4:
             print("Exiting the app. Thank you!")
             break

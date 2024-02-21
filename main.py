@@ -3,6 +3,7 @@ import requests
 def request(URL):
     req = requests.get(url=URL)
     req_result = req.json()
+    print(req_result)
     
     condition = req_result['weather'][0]['main']
     description = req_result['weather'][0]['description']
@@ -60,11 +61,11 @@ with open('appid.txt', 'r') as file:
     appid = file.readline().strip()
 
 print("Welcome to Chimdi's Weather App")
+print("Check the weather of a location.")
 
 
 def run_app():
     while True:
-        print("Check the weather of a location.")
         print("Select an option:")
         print("1. Enter city")
         print("2. Enter zipcode")

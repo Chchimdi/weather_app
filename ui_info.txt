@@ -1,0 +1,7 @@
+Wrote ui.py file to try fetching and displaying out on an interface.
+enter_button = tk.Button(root, text="Enter", command=fetch_weather)
+  - This creates a Button widget with the label "Enter." The command parameter is set to fetch_weather, which means that the fetch_weather function will be called when the button is clicked.
+user_input = input_field.get() 
+  - this retrieve the current text value entered by the user
+display_weather(weather_info)
+  - this function displays the result from the api to the GUI for the user.

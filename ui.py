@@ -10,14 +10,18 @@ def fetch_weather():
     try:
         if user_input.isdigit():
             # Assuming weather_zip is your function to fetch weather by zipcode
-            weather_zipcode(user_input, appid)
+            print(weather_zipcode(user_input, appid))
+            display_weather(weather_zipcode(user_input, appid))
         else:
             # Assuming weather_city is your function to fetch weather by city name
-            weather_city(user_input, appid)
+            display_weather(weather_city(user_input, appid))
     except KeyError:
         result_label.config(text="Not found. Please enter a valid zipcode or city name.")
     except ValueError:
         result_label.config(text="Invalid input. Please try again.")
+
+def display_weather(weather_info):
+    result_label.config(text=weather_info)  # Update the label text to display the weather information
 
 
 # Setting up the GUI
